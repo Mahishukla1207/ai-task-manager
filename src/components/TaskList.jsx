@@ -104,9 +104,9 @@ function TaskList({
               {task.description}
             </p>
 
-            <div className="mt-4 flex items-center justify-between">
+            <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
               <span
-                className={`rounded-full px-3 py-1 text-sm ${
+                className={`w-fit rounded-full px-3 py-1 text-sm ${
                   isDark
                     ? "bg-blue-900/40 text-blue-200"
                     : "bg-blue-100 text-blue-700"
@@ -115,7 +115,7 @@ function TaskList({
                 {task.priority}
               </span>
 
-              <div className="flex gap-2">
+              <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => startEditing(task)}
                   className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"

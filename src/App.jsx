@@ -106,8 +106,8 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8 text-gray-900 transition-colors duration-300 dark:bg-slate-900 dark:text-slate-100">
-      <div className="mx-auto max-w-3xl">
+    <div className="min-h-screen bg-gray-100 px-3 py-4 text-gray-900 transition-colors duration-300 sm:px-6 sm:py-6 lg:px-8 dark:bg-slate-900 dark:text-slate-100">
+      <div className="mx-auto w-full max-w-3xl">
         <Header isDark={isDark} toggleTheme={toggleTheme} />
         <SearchBar
           searchQuery={searchQuery}

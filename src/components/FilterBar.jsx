@@ -2,7 +2,7 @@ function FilterBar({ filter, setFilter, isDark }) {
   const buttons = ["All", "Pending", "Completed"];
 
   return (
-    <div className="mt-4 flex gap-3">
+    <div className="mt-4 flex flex-wrap gap-2 sm:gap-3">
       {buttons.map((btn) => (
         <button
           key={btn}
