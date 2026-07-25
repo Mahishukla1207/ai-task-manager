@@ -1,3 +1,5 @@
+import { FiBarChart2 } from "react-icons/fi";
+
 function Stats({ tasks, isDark }) {
   const totalTasks = tasks.length;
   const completedTasks = tasks.filter((task) => task.completed).length;
@@ -30,7 +32,10 @@ function Stats({ tasks, isDark }) {
             isDark ? "ring-1 ring-white/10" : ""
           }`}
         >
-          <p className="text-sm font-medium opacity-90">{card.title}</p>
+          <div className="flex items-center gap-2">
+            <FiBarChart2 />
+            <p className="text-sm font-medium opacity-90">{card.title}</p>
+          </div>
           <p className="mt-2 text-3xl font-semibold">{card.value}</p>
         </div>
       ))}

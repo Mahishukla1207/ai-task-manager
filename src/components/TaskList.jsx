@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FiEdit2, FiTrash2, FiCheckCircle, FiXCircle } from "react-icons/fi";
 
 function TaskList({
   tasks,
@@ -66,14 +67,16 @@ function TaskList({
                 <div className="flex gap-2">
                   <button
                     onClick={() => saveEditing(task.id)}
-                    className="rounded-lg bg-green-600 px-4 py-2 text-white hover:bg-green-700"
+                    className="flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-white hover:bg-green-700"
                   >
+                    <FiCheckCircle />
                     Save
                   </button>
                   <button
                     onClick={cancelEditing}
-                    className="rounded-lg bg-gray-500 px-4 py-2 text-white hover:bg-gray-600"
+                    className="flex items-center gap-2 rounded-lg bg-gray-500 px-4 py-2 text-white hover:bg-gray-600"
                   >
+                    <FiXCircle />
                     Cancel
                   </button>
                 </div>
@@ -118,26 +121,29 @@ function TaskList({
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => startEditing(task)}
-                  className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+                  className="flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
                 >
+                  <FiEdit2 />
                   Edit
                 </button>
 
                 <button
                   onClick={() => toggleComplete(task.id)}
-                  className={`rounded-lg px-4 py-2 text-white ${
+                  className={`flex items-center gap-2 rounded-lg px-4 py-2 text-white ${
                     task.completed
                       ? "bg-yellow-500 hover:bg-yellow-600"
                       : "bg-green-600 hover:bg-green-700"
                   }`}
                 >
+                  <FiCheckCircle />
                   {task.completed ? "Undo" : "Complete"}
                 </button>
 
                 <button
                   onClick={() => deleteTask(task.id)}
-                  className="rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600"
+                  className="flex items-center gap-2 rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600"
                 >
+                  <FiTrash2 />
                   Delete
                 </button>
               </div>

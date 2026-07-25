@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { FiPlusCircle } from "react-icons/fi";
 
 function TaskForm({ addTask, isDark }) {
   const [title, setTitle] = useState("");
@@ -30,7 +31,10 @@ function TaskForm({ addTask, isDark }) {
         isDark ? "bg-slate-800 text-slate-100" : "bg-white text-gray-900"
       }`}
     >
-      <h2 className="mb-4 text-xl font-semibold">Add New Task</h2>
+      <h2 className="mb-4 flex items-center gap-2 text-xl font-semibold">
+        <FiPlusCircle />
+        Add New Task
+      </h2>
 
       <input
         type="text"
@@ -69,7 +73,8 @@ function TaskForm({ addTask, isDark }) {
         <option>Low</option>
       </select>
 
-      <button className="w-full rounded-lg bg-blue-600 py-3 text-white transition-colors duration-300 hover:bg-blue-700">
+      <button className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 py-3 text-white transition-colors duration-300 hover:bg-blue-700">
+        <FiPlusCircle />
         Add Task
       </button>
     </form>

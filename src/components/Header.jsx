@@ -1,3 +1,5 @@
+import { FiMoon, FiSun, FiCheckCircle } from "react-icons/fi";
+
 function Header({ isDark, toggleTheme }) {
   return (
     <header
@@ -7,7 +9,10 @@ function Header({ isDark, toggleTheme }) {
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex-1 text-center sm:text-left">
-          <h1 className="text-2xl font-bold sm:text-3xl">AI Task Manager 🚀</h1>
+          <h1 className="flex items-center justify-center gap-2 text-2xl font-bold sm:justify-start sm:text-3xl">
+            <FiCheckCircle className="text-2xl" />
+            AI Task Manager
+          </h1>
           <p className="mt-2 text-sm">
             Organize your work smarter.
           </p>
@@ -21,7 +26,8 @@ function Header({ isDark, toggleTheme }) {
               : "bg-white/20 text-white hover:bg-white/30"
           }`}
         >
-          {isDark ? "☀️ Light" : "🌙 Dark"}
+          {isDark ? <FiSun className="mr-1 inline" /> : <FiMoon className="mr-1 inline" />}
+          {isDark ? "Light" : "Dark"}
         </button>
       </div>
     </header>
