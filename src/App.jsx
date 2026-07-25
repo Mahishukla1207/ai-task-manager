@@ -1,12 +1,21 @@
+import { useState } from "react";
 import Header from "./components/Header";
 import TaskForm from "./components/TaskForm";
+import TaskList from "./components/TaskList";
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+
+  const addTask = (task) => {
+    setTasks([...tasks, task]);
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="max-w-3xl mx-auto">
         <Header />
-        <TaskForm />
+        <TaskForm addTask={addTask} />
+        <TaskList tasks={tasks} />
       </div>
     </div>
   );
