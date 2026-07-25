@@ -1,9 +1,30 @@
+import { useState } from "react";
+
 function TaskList({
   tasks,
   deleteTask,
   toggleComplete,
   editTask,
 }) {
+  const [editingId, setEditingId] = useState(null);
+  const [editValue, setEditValue] = useState("");
+
+  const startEditing = (task) => {
+    setEditingId(task.id);
+    setEditValue(task.title);
+  };
+
+  const cancelEditing = () => {
+    setEditingId(null);
+    setEditValue("");
+  };
+
+  const saveEditing = (id) => {
+    editTask(id, editValue);
+    setEditingId(null);
+    setEditValue("");
+  };
+
   return (
     <div className="mt-6">
       <h2 className="text-xl font-semibold mb-4">
@@ -24,15 +45,41 @@ function TaskList({
                 : "bg-white"
             }`}
           >
-            <h3
-              className={`font-bold text-lg ${
-                task.completed
-                  ? "line-through text-gray-500"
-                  : ""
-              }`}
-            >
-              {task.title}
-            </h3>
+            {editingId === task.id ? (
+              <div className="space-y-3">
+                <input
+                  type="text"
+                  value={editValue}
+                  onChange={(e) => setEditValue(e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => saveEditing(task.id)}
+                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
+                  >
+                    Save
+                  </button>
+                  <button
+                    onClick={cancelEditing}
+                    className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <h3
+                className={`font-bold text-lg ${
+                  task.completed
+                    ? "line-through text-gray-500"
+                    : ""
+                }`}
+              >
+                {task.title}
+              </h3>
+            )}
 
             <p
               className={`mt-2 ${
@@ -51,7 +98,7 @@ function TaskList({
 
               <div className="flex gap-2">
                 <button
-                  onClick={() => editTask(task.id)}
+                  onClick={() => startEditing(task)}
                   className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
                 >
                   Edit

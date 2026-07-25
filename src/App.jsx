@@ -51,15 +51,15 @@ function App() {
     );
   };
 
-  const editTask = (id) => {
-    const newTitle = prompt("Enter new task title:");
+  const editTask = (id, newTitle) => {
+    const trimmedTitle = newTitle.trim();
 
-    if (!newTitle || !newTitle.trim()) return;
+    if (!trimmedTitle) return;
 
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
         task.id === id
-          ? { ...task, title: newTitle }
+          ? { ...task, title: trimmedTitle }
           : task
       )
     );
