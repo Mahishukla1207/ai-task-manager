@@ -1,4 +1,4 @@
-function Stats({ tasks }) {
+function Stats({ tasks, isDark }) {
   const totalTasks = tasks.length;
   const completedTasks = tasks.filter((task) => task.completed).length;
   const pendingTasks = totalTasks - completedTasks;
@@ -26,7 +26,9 @@ function Stats({ tasks }) {
       {cards.map((card) => (
         <div
           key={card.title}
-          className={`rounded-2xl p-5 shadow-md transition-transform hover:-translate-y-1 ${card.accent}`}
+          className={`rounded-2xl p-5 shadow-md transition-all duration-300 hover:-translate-y-1 ${card.accent} ${
+            isDark ? "ring-1 ring-white/10" : ""
+          }`}
         >
           <p className="text-sm font-medium opacity-90">{card.title}</p>
           <p className="mt-2 text-3xl font-semibold">{card.value}</p>

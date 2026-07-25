@@ -7,6 +7,7 @@ import FilterBar from "./components/FilterBar";
 import Stats from "./components/Stats";
 
 const STORAGE_KEY = "ai-task-manager-tasks";
+const THEME_STORAGE_KEY = "ai-task-manager-theme";
 
 function App() {
   const [tasks, setTasks] = useState(() => {
@@ -22,6 +23,16 @@ function App() {
   });
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState("All");
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window === "undefined") return false;
+
+    try {
+      return window.localStorage.getItem(THEME_STORAGE_KEY) === "dark";
+    } catch (error) {
+      console.error("Failed to load theme from localStorage:", error);
+      return false;
+    }
+  });
 
   useEffect(() => {
     try {
@@ -30,6 +41,16 @@ function App() {
       console.error("Failed to save tasks to localStorage:", error);
     }
   }, [tasks]);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", isDark);
+
+    try {
+      window.localStorage.setItem(THEME_STORAGE_KEY, isDark ? "dark" : "light");
+    } catch (error) {
+      console.error("Failed to save theme to localStorage:", error);
+    }
+  }, [isDark]);
 
   const addTask = (task) => {
     setTasks((prevTasks) => [...prevTasks, task]);
@@ -80,20 +101,29 @@ function App() {
     return matchesSearch && matchesFilter;
   });
 
+  const toggleTheme = () => {
+    setIsDark((prev) => !prev);
+  };
+
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="max-w-3xl mx-auto">
-        <Header />
-        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-        <FilterBar filter={filter} setFilter={setFilter} />
-        <Stats tasks={tasks} />
-        <TaskForm addTask={addTask} />
+    <div className="min-h-screen bg-gray-100 p-8 text-gray-900 transition-colors duration-300 dark:bg-slate-900 dark:text-slate-100">
+      <div className="mx-auto max-w-3xl">
+        <Header isDark={isDark} toggleTheme={toggleTheme} />
+        <SearchBar
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          isDark={isDark}
+        />
+        <FilterBar filter={filter} setFilter={setFilter} isDark={isDark} />
+        <Stats tasks={tasks} isDark={isDark} />
+        <TaskForm addTask={addTask} isDark={isDark} />
 
         <TaskList
           tasks={filteredTasks}
           deleteTask={deleteTask}
           toggleComplete={toggleComplete}
           editTask={editTask}
+          isDark={isDark}
         />
       </div>
     </div>

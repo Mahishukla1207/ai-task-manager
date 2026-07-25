@@ -5,6 +5,7 @@ function TaskList({
   deleteTask,
   toggleComplete,
   editTask,
+  isDark,
 }) {
   const [editingId, setEditingId] = useState(null);
   const [editValue, setEditValue] = useState("");
@@ -27,22 +28,26 @@ function TaskList({
 
   return (
     <div className="mt-6">
-      <h2 className="text-xl font-semibold mb-4">
+      <h2 className={`mb-4 text-xl font-semibold ${isDark ? "text-slate-100" : "text-gray-900"}`}>
         Tasks
       </h2>
 
       {tasks.length === 0 ? (
-        <p className="text-gray-500">
+        <p className={isDark ? "text-slate-400" : "text-gray-500"}>
           No tasks yet.
         </p>
       ) : (
         tasks.map((task) => (
           <div
             key={task.id}
-            className={`rounded-xl shadow p-5 mb-4 ${
+            className={`mb-4 rounded-xl p-5 shadow-md transition-colors duration-300 ${
               task.completed
-                ? "bg-green-100"
-                : "bg-white"
+                ? isDark
+                  ? "bg-emerald-900/40 text-slate-100"
+                  : "bg-green-100 text-gray-900"
+                : isDark
+                ? "bg-slate-800 text-slate-100"
+                : "bg-white text-gray-900"
             }`}
           >
             {editingId === task.id ? (
@@ -51,19 +56,23 @@ function TaskList({
                   type="text"
                   value={editValue}
                   onChange={(e) => setEditValue(e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className={`w-full rounded-lg border p-3 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    isDark
+                      ? "border-slate-600 bg-slate-700 text-slate-100"
+                      : "border-gray-300 bg-white text-gray-900"
+                  }`}
                 />
 
                 <div className="flex gap-2">
                   <button
                     onClick={() => saveEditing(task.id)}
-                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg"
+                    className="rounded-lg bg-green-600 px-4 py-2 text-white hover:bg-green-700"
                   >
                     Save
                   </button>
                   <button
                     onClick={cancelEditing}
-                    className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg"
+                    className="rounded-lg bg-gray-500 px-4 py-2 text-white hover:bg-gray-600"
                   >
                     Cancel
                   </button>
@@ -71,9 +80,9 @@ function TaskList({
               </div>
             ) : (
               <h3
-                className={`font-bold text-lg ${
+                className={`text-lg font-bold ${
                   task.completed
-                    ? "line-through text-gray-500"
+                    ? "text-gray-500 line-through"
                     : ""
                 }`}
               >
@@ -84,29 +93,39 @@ function TaskList({
             <p
               className={`mt-2 ${
                 task.completed
-                  ? "line-through text-gray-500"
+                  ? isDark
+                    ? "text-slate-300 line-through"
+                    : "text-gray-500 line-through"
+                  : isDark
+                  ? "text-slate-300"
                   : "text-gray-600"
               }`}
             >
               {task.description}
             </p>
 
-            <div className="flex justify-between items-center mt-4">
-              <span className="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-sm">
+            <div className="mt-4 flex items-center justify-between">
+              <span
+                className={`rounded-full px-3 py-1 text-sm ${
+                  isDark
+                    ? "bg-blue-900/40 text-blue-200"
+                    : "bg-blue-100 text-blue-700"
+                }`}
+              >
                 {task.priority}
               </span>
 
               <div className="flex gap-2">
                 <button
                   onClick={() => startEditing(task)}
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
+                  className="rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
                 >
                   Edit
                 </button>
 
                 <button
                   onClick={() => toggleComplete(task.id)}
-                  className={`px-4 py-2 rounded-lg text-white ${
+                  className={`rounded-lg px-4 py-2 text-white ${
                     task.completed
                       ? "bg-yellow-500 hover:bg-yellow-600"
                       : "bg-green-600 hover:bg-green-700"
@@ -117,7 +136,7 @@ function TaskList({
 
                 <button
                   onClick={() => deleteTask(task.id)}
-                  className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg"
+                  className="rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600"
                 >
                   Delete
                 </button>
