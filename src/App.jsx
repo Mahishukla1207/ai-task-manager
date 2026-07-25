@@ -2,9 +2,11 @@ import { useState } from "react";
 import Header from "./components/Header";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   const [tasks, setTasks] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const addTask = (task) => {
     setTasks((prevTasks) => [...prevTasks, task]);
@@ -39,16 +41,20 @@ function App() {
       )
     );
   };
+  const filteredTasks = tasks.filter((task) =>
+  task.title.toLowerCase().includes(searchQuery.toLowerCase())
+);
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="max-w-3xl mx-auto">
         <Header />
+        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
         <TaskForm addTask={addTask} />
 
         <TaskList
-          tasks={tasks}
+          tasks={filteredTasks}
           deleteTask={deleteTask}
           toggleComplete={toggleComplete}
           editTask={editTask}
