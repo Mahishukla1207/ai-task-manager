@@ -41,7 +41,7 @@ function TaskList({
         tasks.map((task) => (
           <div
             key={task.id}
-            className={`mb-4 rounded-xl p-5 shadow-md transition-colors duration-300 ${
+            className={`mb-4 animate-[fadeIn_0.25s_ease-out] rounded-xl p-5 shadow-md transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg ${
               task.completed
                 ? isDark
                   ? "bg-emerald-900/40 text-slate-100"
@@ -67,14 +67,14 @@ function TaskList({
                 <div className="flex gap-2">
                   <button
                     onClick={() => saveEditing(task.id)}
-                    className="flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-white hover:bg-green-700"
+                    className="flex items-center gap-2 rounded-lg bg-green-600 px-4 py-2 text-white transition-transform duration-200 hover:-translate-y-0.5 hover:bg-green-700"
                   >
                     <FiCheckCircle />
                     Save
                   </button>
                   <button
                     onClick={cancelEditing}
-                    className="flex items-center gap-2 rounded-lg bg-gray-500 px-4 py-2 text-white hover:bg-gray-600"
+                    className="flex items-center gap-2 rounded-lg bg-gray-500 px-4 py-2 text-white transition-transform duration-200 hover:-translate-y-0.5 hover:bg-gray-600"
                   >
                     <FiXCircle />
                     Cancel
@@ -121,7 +121,7 @@ function TaskList({
               <div className="flex flex-wrap gap-2">
                 <button
                   onClick={() => startEditing(task)}
-                  className="flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+                  className="flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-white transition-transform duration-200 hover:-translate-y-0.5 hover:bg-blue-600"
                 >
                   <FiEdit2 />
                   Edit
@@ -129,7 +129,7 @@ function TaskList({
 
                 <button
                   onClick={() => toggleComplete(task.id)}
-                  className={`flex items-center gap-2 rounded-lg px-4 py-2 text-white ${
+                  className={`flex items-center gap-2 rounded-lg px-4 py-2 text-white transition-transform duration-200 hover:-translate-y-0.5 ${
                     task.completed
                       ? "bg-yellow-500 hover:bg-yellow-600"
                       : "bg-green-600 hover:bg-green-700"
@@ -141,7 +141,7 @@ function TaskList({
 
                 <button
                   onClick={() => deleteTask(task.id)}
-                  className="flex items-center gap-2 rounded-lg bg-red-500 px-4 py-2 text-white hover:bg-red-600"
+                  className="flex items-center gap-2 rounded-lg bg-red-500 px-4 py-2 text-white transition-transform duration-200 hover:-translate-y-0.5 hover:bg-red-600"
                 >
                   <FiTrash2 />
                   Delete

@@ -20,7 +20,7 @@ function Header({ isDark, toggleTheme }) {
 
         <button
           onClick={toggleTheme}
-          className={`self-center rounded-lg px-3 py-2 text-sm font-medium transition-colors duration-300 sm:self-auto ${
+          className={`self-center rounded-lg px-3 py-2 text-sm font-medium transition-all duration-200 hover:-translate-y-0.5 sm:self-auto ${
             isDark
               ? "bg-slate-700 text-slate-100 hover:bg-slate-600"
               : "bg-white/20 text-white hover:bg-white/30"

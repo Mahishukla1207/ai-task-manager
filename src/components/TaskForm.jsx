@@ -73,7 +73,7 @@ function TaskForm({ addTask, isDark }) {
         <option>Low</option>
       </select>
 
-      <button className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 py-3 text-white transition-colors duration-300 hover:bg-blue-700">
+      <button className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 py-3 text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-700">
         <FiPlusCircle />
         Add Task
       </button>
