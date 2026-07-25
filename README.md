@@ -1,16 +1,89 @@
-# React + Vite
+# AI Task Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern task management application built with React, Vite, and Tailwind CSS. It helps users organize work with task creation, editing, completion tracking, search, filtering, local persistence, and live statistics.
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+AI Task Manager is a clean and responsive productivity app that allows users to manage daily tasks efficiently. The interface is designed to be simple, modern, and easy to use while offering essential task management features.
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Add new tasks
+- Edit existing tasks inline
+- Delete tasks
+- Mark tasks as complete or undo completion
+- Search tasks by title
+- Filter tasks by status
+- Persist tasks using localStorage
+- View task statistics including totals, completed, and pending tasks
+- Responsive layout for mobile, tablet, and desktop
+- Dark mode support
 
-## Expanding the ESLint configuration
+## Screenshots
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+> Add screenshots of the app here once available.
+>
+> Example:
+> - Home view
+> - Task creation form
+> - Task list with completed tasks
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <your-repository-url>
+   cd ai-task-manager
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Open your browser and visit:
+   ```bash
+   http://localhost:5173
+   ```
+
+## Folder Structure
+
+```text
+src/
+├── App.jsx
+├── index.css
+├── main.jsx
+└── components/
+    ├── FilterBar.jsx
+    ├── Header.jsx
+    ├── SearchBar.jsx
+    ├── Stats.jsx
+    ├── TaskForm.jsx
+    ├── TaskList.jsx
+```
+
+## Future Improvements
+
+- Drag-and-drop task reordering
+- Task deadlines and reminders
+- Categories and tags
+- Priority-based sorting
+- Export/import tasks
+- User authentication and cloud sync
+
+## Technologies Used
+
+- React
+- Vite
+- Tailwind CSS
+- React Icons
+- Local Storage API
+
+## License
+
+This project is licensed under the MIT License.
