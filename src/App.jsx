@@ -1,12 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
 import SearchBar from "./components/SearchBar";
+import FilterBar from "./components/FilterBar";
+import Stats from "./components/Stats";
+
+const STORAGE_KEY = "ai-task-manager-tasks";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    if (typeof window === "undefined") return [];
+
+    try {
+      const storedTasks = window.localStorage.getItem(STORAGE_KEY);
+      return storedTasks ? JSON.parse(storedTasks) : [];
+    } catch (error) {
+      console.error("Failed to load tasks from localStorage:", error);
+      return [];
+    }
+  });
   const [searchQuery, setSearchQuery] = useState("");
+  const [filter, setFilter] = useState("All");
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+    } catch (error) {
+      console.error("Failed to save tasks to localStorage:", error);
+    }
+  }, [tasks]);
 
   const addTask = (task) => {
     setTasks((prevTasks) => [...prevTasks, task]);
@@ -41,16 +64,29 @@ function App() {
       )
     );
   };
-  const filteredTasks = tasks.filter((task) =>
-  task.title.toLowerCase().includes(searchQuery.toLowerCase())
-);
+
+  const filteredTasks = tasks.filter((task) => {
+    const matchesSearch = task.title
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+
+    const matchesFilter =
+      filter === "All"
+        ? true
+        : filter === "Completed"
+        ? task.completed
+        : !task.completed;
+
+    return matchesSearch && matchesFilter;
+  });
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="max-w-3xl mx-auto">
         <Header />
         <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
-
+        <FilterBar filter={filter} setFilter={setFilter} />
+        <Stats tasks={tasks} />
         <TaskForm addTask={addTask} />
 
         <TaskList
