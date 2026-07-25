@@ -1,22 +1,34 @@
-function TaskList({ tasks, deleteTask, toggleComplete }) {
-    console.log("toggleComplete prop:", toggleComplete);
+function TaskList({
+  tasks,
+  deleteTask,
+  toggleComplete,
+  editTask,
+}) {
   return (
     <div className="mt-6">
-      <h2 className="text-xl font-semibold mb-4">Tasks</h2>
+      <h2 className="text-xl font-semibold mb-4">
+        Tasks
+      </h2>
 
       {tasks.length === 0 ? (
-        <p className="text-gray-500">No tasks yet.</p>
+        <p className="text-gray-500">
+          No tasks yet.
+        </p>
       ) : (
         tasks.map((task) => (
           <div
             key={task.id}
             className={`rounded-xl shadow p-5 mb-4 ${
-              task.completed ? "bg-green-100" : "bg-white"
+              task.completed
+                ? "bg-green-100"
+                : "bg-white"
             }`}
           >
             <h3
               className={`font-bold text-lg ${
-                task.completed ? "line-through text-gray-500" : ""
+                task.completed
+                  ? "line-through text-gray-500"
+                  : ""
               }`}
             >
               {task.title}
@@ -37,7 +49,14 @@ function TaskList({ tasks, deleteTask, toggleComplete }) {
                 {task.priority}
               </span>
 
-              <div className="space-x-2">
+              <div className="flex gap-2">
+                <button
+                  onClick={() => editTask(task.id)}
+                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg"
+                >
+                  Edit
+                </button>
+
                 <button
                   onClick={() => toggleComplete(task.id)}
                   className={`px-4 py-2 rounded-lg text-white ${

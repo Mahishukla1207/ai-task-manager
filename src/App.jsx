@@ -7,32 +7,52 @@ function App() {
   const [tasks, setTasks] = useState([]);
 
   const addTask = (task) => {
-    setTasks([...tasks, task]);
+    setTasks((prevTasks) => [...prevTasks, task]);
   };
+
   const deleteTask = (id) => {
-  setTasks(tasks.filter(task => task.id !== id));
-};
-const toggleComplete = (id) => {
-  console.log(id);
-  
-  setTasks(
-    tasks.map((task) =>
-      task.id === id
-        ? { ...task, completed: !task.completed }
-        : task
-    )
-  );
-};
-console.log("Rendering App");
-console.log(toggleComplete);
+    setTasks((prevTasks) =>
+      prevTasks.filter((task) => task.id !== id)
+    );
+  };
+
+  const toggleComplete = (id) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id
+          ? { ...task, completed: !task.completed }
+          : task
+      )
+    );
+  };
+
+  const editTask = (id) => {
+    const newTitle = prompt("Enter new task title:");
+
+    if (!newTitle || !newTitle.trim()) return;
+
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === id
+          ? { ...task, title: newTitle }
+          : task
+      )
+    );
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <div className="max-w-3xl mx-auto">
         <Header />
+
         <TaskForm addTask={addTask} />
-        <TaskList tasks={tasks}
-        deleteTask={deleteTask}
-        toggleComplete={toggleComplete} />
+
+        <TaskList
+          tasks={tasks}
+          deleteTask={deleteTask}
+          toggleComplete={toggleComplete}
+          editTask={editTask}
+        />
       </div>
     </div>
   );
